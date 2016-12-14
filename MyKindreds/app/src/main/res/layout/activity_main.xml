@@ -25,7 +25,8 @@
             android:layout_height="270dp"
             android:background="@color/textClear"
             android:layout_margin="10dp"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:id="@+id/textView" />
 
 
         <FrameLayout
