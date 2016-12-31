@@ -11,7 +11,17 @@
     android:fitsSystemWindows = "true">
 
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabTextColor"
+        android:onClick="voiceOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:src="@android:drawable/ic_btn_speak_now"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        app:layout_anchor="@+id/linearLayout"
+        app:layout_anchorGravity="bottom|right" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,18 +86,6 @@
 
 
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabTextColor"
-        android:onClick="voiceOn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:src="@android:drawable/ic_btn_speak_now"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        app:layout_anchor="@+id/linearLayout"
-        app:layout_anchorGravity="bottom|right" />
 
 </android.support.design.widget.CoordinatorLayout>
 
