@@ -1,3 +1,7 @@
+/**
+ * Created by Tester on 2017/01/01.
+ * インターネット接続を行うクラス
+ */
 package local.hal.st32.android.mykindreds;
 
 import android.os.AsyncTask;
@@ -11,9 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by Tester on 2017/01/01.
- */
+
 
 public abstract class Access extends AsyncTask<String,Void,String> {
     private static final String DEBUG_TAG = "Access";
