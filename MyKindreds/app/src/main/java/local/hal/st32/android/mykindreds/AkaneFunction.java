@@ -5,14 +5,13 @@
  */
 package local.hal.st32.android.mykindreds;
 
-import android.content.Context;
 
 
 public class AkaneFunction {
 
-    public Context context;
+    public MainActivity context;
 
-    public AkaneFunction(Context context){
+    public AkaneFunction(MainActivity context){
         this.context = context;
     }
 
@@ -23,13 +22,21 @@ public class AkaneFunction {
     public void methodSwitch(String voice){
         switch (voice){
             case "天気":
+                WeatherFunction weather = new WeatherFunction();
+                weather.startWeather();
+                break;
 
+            case "テスト":
+                VoiceTestFunction voiceTest = new VoiceTestFunction(context);
+                voiceTest.start();
                 break;
 
             default:
+
                 break;
         }
     }
+
 
 
 
