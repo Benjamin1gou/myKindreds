@@ -19,9 +19,10 @@ import static local.hal.st32.android.mykindreds.Voice.*;
 
 public class MainActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
 
-    private TextToSpeech tts;
-    private ImageView character;
+    public static TextToSpeech tts;
+    public static ImageView character;
     private TextView speakText;
+    public static ImageView icon;
     private static final int REQUEST_CODE = 1000;
     private AkaneFunction functions = new AkaneFunction(MainActivity.this);
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        icon = (ImageView)findViewById(R.id.imageView2);
         tts = new TextToSpeech(this,this);
     }
 
@@ -88,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 String str = candidates.get(0);
                 speakText = (TextView)findViewById(R.id.textArea);
                 speakText.setText(str);
-                //分岐機能開始
                 functions.methodSwitch(str);
             }
         }
