@@ -51,7 +51,6 @@ public class VoiceTestFunction extends AppCompatActivity {
 
             if(candidates.size() > 0) {
                 // 認識結果候補で一番有力なものを表示
-//                textView.setText( candidates.get(0));
                 character.setImageResource(R.drawable.akane_speak);
                 String str = candidates.get(0);
                 TextView speakText = (TextView)main.findViewById(R.id.textArea);
