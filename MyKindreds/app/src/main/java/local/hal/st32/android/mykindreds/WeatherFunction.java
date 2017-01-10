@@ -52,7 +52,6 @@ public class WeatherFunction {
             String msg = "今日の天気は" + telop + "\n" + text;
 
             weatherOutPut(telop,msg);
-            tts.speak(msg, TextToSpeech.QUEUE_ADD, null, msg);
         }
 
     }
@@ -65,6 +64,7 @@ public class WeatherFunction {
     public void weatherOutPut(String telop, String msg){
         MainActivity.character.setImageResource(R.drawable.akane_speak);
         msg = weatherSwitch(telop);
+        tts.speak(msg, TextToSpeech.QUEUE_ADD, null, msg);
     }
 
     /**
