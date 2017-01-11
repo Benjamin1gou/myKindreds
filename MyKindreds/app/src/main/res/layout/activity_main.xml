@@ -70,7 +70,6 @@
                 android:id="@+id/imageView2" />
 
         </FrameLayout>
-
         <TextView
             android:id="@+id/textArea"
             android:layout_width="match_parent"
