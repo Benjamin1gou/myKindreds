@@ -6,6 +6,7 @@
 package local.hal.st32.android.mykindreds;
 
 
+import android.speech.tts.TextToSpeech;
 
 public class AkaneFunction {
 
@@ -32,7 +33,7 @@ public class AkaneFunction {
                 break;
 
             default:
-
+                MainActivity.tts.speak(Voice.voiceNone, TextToSpeech.QUEUE_ADD, null, Voice.voiceNone);
                 break;
         }
     }
