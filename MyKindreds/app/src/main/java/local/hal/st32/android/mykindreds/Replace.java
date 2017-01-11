@@ -16,7 +16,7 @@ import java.util.Map;
  *
  */
 
-public class Replase {
+public class Replace {
 
     private ArrayList<String> requestId = new ArrayList<String>();
 
@@ -38,13 +38,13 @@ public class Replase {
         tableName = name;
     }
 
-    public List<Map<String, String>> json(String result) {
+    public List<Map<String, String>> json(String result,String referenceValue) {
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         try {
 
             Map<String, String> map = new HashMap<String, String>();
             JSONObject rootJSON = new JSONObject(result);
-            JSONArray arrayJson = rootJSON.getJSONArray("date");
+            JSONArray arrayJson = rootJSON.getJSONArray(referenceValue);
             for (int i = 0; i < arrayJson.length(); i++) {
                 JSONObject data = arrayJson.getJSONObject(i);
                 map = new HashMap<String, String>();
@@ -72,8 +72,24 @@ public class Replase {
             }
 
         } catch (JSONException ex) {
+            Log.d(DEBUG_TAG, "JSON解析失敗", ex);
+        }
+        return map;
+    }
+
+    public Map<String, String> oneColmunJson(String result){
+        Map<String, String> map = new HashMap<String, String>();
+        try{
+            JSONObject rootJSON = new JSONObject(result);
+            for (int x = 0; x < requestId.size(); x++) {
+                map.put(requestId.get(x), rootJSON.getString(requestId.get(x)));
+                Log.d("map", requestId.get(x) + ":" + rootJSON.getString(requestId.get(x)));
+            }
+
+        }catch (JSONException ex) {
             Log.e(DEBUG_TAG, "JSON解析失敗", ex);
         }
+
         return map;
     }
 }
