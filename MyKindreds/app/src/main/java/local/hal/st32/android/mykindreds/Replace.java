@@ -1,5 +1,6 @@
 package local.hal.st32.android.mykindreds;
 
+import android.database.Cursor;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -61,6 +62,7 @@ public class Replace {
         return list;
     }
 
+    @Deprecated
     public Map<String, String> jsonOne(String result) {
         Map<String, String> map = new HashMap<String, String>();
         try {
@@ -77,6 +79,11 @@ public class Replace {
         return map;
     }
 
+    /**
+     * １行分のJSONデータを解析するメソッド
+     * @param result
+     * @return １行分の解析されたデータ
+     */
     public Map<String, String> oneColmunJson(String result){
         Map<String, String> map = new HashMap<String, String>();
         try{
@@ -91,5 +98,22 @@ public class Replace {
         }
 
         return map;
+    }
+
+    /**
+     * Cursor解析メソッド
+     * @param cursor
+     * @return 
+     */
+    public ArrayList<String> analysisCursor(Cursor cursor){
+        ArrayList<String> result = new ArrayList<String>();
+        boolean flg = cursor.moveToFirst();
+        while(flg) {
+            for(int x = 0 ; x<requestId.size(); x++){
+                result.add(cursor.getString(cursor.getColumnIndex(requestId.get(x))));
+            }
+            flg = cursor.moveToNext();
+        }
+        return result;
     }
 }
