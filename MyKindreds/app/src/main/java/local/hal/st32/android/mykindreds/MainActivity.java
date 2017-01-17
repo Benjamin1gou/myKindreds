@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
     public static TextToSpeech tts;
     public static ImageView character;
-    private TextView speakText;
+    public static TextView speakText;
     public static ImageView icon;
     private static final int REQUEST_CODE = 1000;
     private AkaneFunction functions = new AkaneFunction(MainActivity.this);
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        speakText = (TextView)findViewById(R.id.textArea);
         icon = (ImageView)findViewById(R.id.imageView2);
         tts = new TextToSpeech(this,this);
     }
@@ -85,11 +85,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
             if(candidates.size() > 0) {
                 // 認識結果候補で一番有力なものを表示
-//                textView.setText( candidates.get(0));
-                character.setImageResource(R.drawable.akane_speak);
                 String str = candidates.get(0);
-                speakText = (TextView)findViewById(R.id.textArea);
-                speakText.setText(str);
                 functions.methodSwitch(str);
             }
         }
@@ -107,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             //キーコード取得
             int keyCode = event.getKeyCode();
-            Log.d("KeyCode","KeyCode:"+ event.getKeyCode());
             if(126 == keyCode || 127 == keyCode || 79 == keyCode){
                 speech();
             }
@@ -118,5 +113,9 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
     public void voiceOn(View view){
         speech();
+    }
+
+    public void testOn(View view){
+        functions.methodSwitch("天気");
     }
 }
