@@ -7,6 +7,9 @@ package local.hal.st32.android.mykindreds;
 
 
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 public class AkaneFunction {
 
@@ -16,11 +19,27 @@ public class AkaneFunction {
         this.context = context;
     }
 
+
+
     /**
      * 音声で機能を分岐させるメソッド
      * @param voice
      */
     public void methodSwitch(String voice){
+
+        ArrayList<String> contents = new ArrayList<String>();
+        contents = DataAccess.contentsAll(context);
+        int count = 0;
+
+        for (String content: contents ){
+            if(content.indexOf(voice) >= 0){
+                break;
+            }else{
+                count++;
+            }
+        }
+        Log.d("count", ":"+count);
+
         switch (voice){
             case "天気":
                 WeatherFunction weather = new WeatherFunction();
