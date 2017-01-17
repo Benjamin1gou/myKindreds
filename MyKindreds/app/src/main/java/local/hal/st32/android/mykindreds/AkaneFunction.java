@@ -40,16 +40,20 @@ public class AkaneFunction {
         }
         Log.d("count", ":"+count);
 
-        switch (voice){
-            case "天気":
+        switch (count){
+            case 0:
                 WeatherFunction weather = new WeatherFunction();
                 weather.startWeather();
                 break;
 
-            case "テスト":
+            case 3:
                 VoiceTestFunction voiceTest = new VoiceTestFunction(context);
                 voiceTest.start();
                 break;
+
+            case 4:
+                BalsFunction musuka = new BalsFunction();
+                musuka.bals();
 
             default:
                 MainActivity.tts.speak(Voice.voiceNone, TextToSpeech.QUEUE_ADD, null, Voice.voiceNone);
