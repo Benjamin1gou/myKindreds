@@ -6,14 +6,16 @@ package local.hal.st32.android.mykindreds;
 
 
 import android.speech.tts.TextToSpeech;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.text.TextUtils.TruncateAt;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static local.hal.st32.android.mykindreds.MainActivity.tts;
 
 
 public class WeatherFunction {
@@ -24,8 +26,9 @@ public class WeatherFunction {
         Weather weather = new Weather();
         weatherIcon = MainActivity.icon;
         //ここ修復まち　引数一つのためくっつけるように変更
-        weather.execute(URL.WEATHER_URL, "270000");
+        weather.execute(URL.WEATHER_URL+"?city=270000");
     }
+
 
     private class Weather extends Access{
         private static final String DEBUG_TAG = "Weather";
@@ -49,8 +52,7 @@ public class WeatherFunction {
                 Log.e(DEBUG_TAG, "JSON解析失敗", ex);
             }
 
-            String msg = "今日の天気は" + telop + "\n" + text;
-
+            String msg = Voice.voiceWeather+"今日の天気は" + telop + "\n" + text;
             weatherOutPut(telop,msg);
         }
 
@@ -63,16 +65,21 @@ public class WeatherFunction {
      */
     public void weatherOutPut(String telop, String msg){
         MainActivity.character.setImageResource(R.drawable.akane_speak);
-        msg = weatherSwitch(telop);
-        tts.speak(msg, TextToSpeech.QUEUE_ADD, null, msg);
+        String speak = msg;
+        speak = weatherSwitch(telop, speak);
+
+        MainActivity.speakText.setFocusableInTouchMode(true);
+        MainActivity.speakText.setEllipsize(TruncateAt.MARQUEE);
+        MainActivity.speakText.setText(speak);
+        MainActivity.tts.speak(speak, TextToSpeech.QUEUE_ADD, null, speak);
     }
 
     /**
      * 天気によって出力する天気のアイコンを分岐させるメソッド
      * @param telop
      */
-    public String weatherSwitch(String telop){
-        String msg = "";
+    public String weatherSwitch(String telop, String speak){
+        String msg = speak;
         switch (telop){
             case "晴れ":
                 weatherIcon.setImageResource(R.drawable.tenki_sun);
