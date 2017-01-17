@@ -103,7 +103,7 @@ public class Replace {
     /**
      * Cursor解析メソッド
      * @param cursor
-     * @return 
+     * @return
      */
     public ArrayList<String> analysisCursor(Cursor cursor){
         ArrayList<String> result = new ArrayList<String>();
