@@ -59,7 +59,7 @@ public class WeatherFunction {
     }
 
     /**
-     * 取得した天気情報を取得するメソッド
+     * 取得した天気情報を表示するメソッド
      * @param telop
      * @param msg
      */
@@ -114,6 +114,8 @@ public class WeatherFunction {
             case "暴風雨":
                 weatherIcon.setImageResource(R.drawable.tenki_bohu);
                 break;
+            case "晴時々曇り":
+                weatherIcon.setImageResource(R.drawable.tenki_kumo);
             default:
                 weatherIcon.setImageResource(R.drawable.question);
                 msg = "知らないパターンです。新しく登録お願いしますマスター" + telop;
