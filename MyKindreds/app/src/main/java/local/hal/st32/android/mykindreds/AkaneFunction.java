@@ -6,6 +6,7 @@
 package local.hal.st32.android.mykindreds;
 
 
+import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
@@ -41,21 +42,52 @@ public class AkaneFunction {
         Log.d("count", ":"+count);
 
         switch (count){
+            /**
+             * 天気メソッド
+             */
             case 0:
                 WeatherFunction weather = new WeatherFunction();
                 weather.startWeather();
                 break;
 
+            /**
+             * 検索
+             */
+            case 1:
+                break;
+
+            /**
+             * Todo
+             */
+            case 2:
+                TodoFunction todo = new TodoFunction(context);
+
+
+                break;
+
+            /**
+             * テスト
+             */
             case 3:
                 VoiceTestFunction voiceTest = new VoiceTestFunction(context);
                 voiceTest.start();
                 break;
 
+            /**
+             * バルス
+             */
             case 4:
                 BalsFunction musuka = new BalsFunction();
                 musuka.bals();
+                break;
+
+            case 5:
+                NowLocationGetFunction location = new NowLocationGetFunction(context);
+                break;
+
 
             default:
+                MainActivity.icon.setImageResource(R.drawable.question);
                 MainActivity.tts.speak(Voice.voiceNone, TextToSpeech.QUEUE_ADD, null, Voice.voiceNone);
                 break;
         }
