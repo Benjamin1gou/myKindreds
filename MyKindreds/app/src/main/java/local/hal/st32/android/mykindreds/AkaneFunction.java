@@ -61,8 +61,7 @@ public class AkaneFunction {
              */
             case 2:
                 TodoFunction todo = new TodoFunction(context);
-
-
+                todo.todoStart(voice);
                 break;
 
             /**
@@ -89,6 +88,7 @@ public class AkaneFunction {
             default:
                 MainActivity.icon.setImageResource(R.drawable.question);
                 MainActivity.tts.speak(Voice.voiceNone, TextToSpeech.QUEUE_ADD, null, Voice.voiceNone);
+                MainActivity.speakText.setText(voice);
                 break;
         }
     }
