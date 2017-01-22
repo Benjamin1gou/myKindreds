@@ -1,6 +1,9 @@
 INSERT
- INTO todo(line, title)
+ INTO todo(id, line, title)
  VALUES(
+ /*if(_ID)start*/
+ _ID,
+ /*if(_ID)end*/
  /*if(LINE)start*/
  LINE,
  /*if(LINE)end*/
