@@ -1,13 +1,15 @@
-/**
+/***************************
  * ClassName: RequestDataServlet
  * CreateDate: 2017/01/19
  * Creater: Tester
- * content: 
- */
+ * content: Android端末よりリクエストが来た際にDBより必要な情報を返却するサーブレット
+ * *************************/
 package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,18 +47,23 @@ public class RquestDataServet extends HttpServlet {
 		
 		String method = request.getParameter("method");
 		String userId = request.getParameter("userId");
+		HashMap<String, ArrayList<HashMap<String,String>>> returnData = new HashMap<String, ArrayList<HashMap<String,String>>>();
 		
 		
 		JSON json = new JSON();
 		switch(method){
 		case "Todo":
 			String type = request.getParameter("type");
-			SwitchToDo todo = new SwitchToDo();
-			
+			String mission = request.getParameter("mission");
+			SwitchToDo todo = new SwitchToDo(mission, userId, type, this);
+			returnData.put("data", todo.typeSwitch());
 			break;
 		case "":
 		}
 		
+		out.println(json.encode(returnData));
+		out.flush();
+		out.close();
 	}
 
 	/**
