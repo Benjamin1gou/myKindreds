@@ -4,6 +4,6 @@ SERECT
   todo
  WHERE
  /*if(_ID)start*/
- WHERE id = _ID
+ id = _ID
  /*if(_ID)end*/
 ;
