@@ -1,4 +1,4 @@
-SERECT
+SELECT
  title
  FROM 
   todo
