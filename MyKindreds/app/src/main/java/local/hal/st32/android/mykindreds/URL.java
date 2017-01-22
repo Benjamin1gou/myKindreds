@@ -6,5 +6,5 @@ package local.hal.st32.android.mykindreds;
 
 public interface URL {
     public static final String WEATHER_URL ="http://weather.livedoor.com/forecast/webservice/json/v1";
-    public static final String Todo_URL = "";
+    public static final String Todo_URL = "http://"+IpAddress.ipAddress+":8080/MykindredsServerSide/RequestDataServlet";
 }
