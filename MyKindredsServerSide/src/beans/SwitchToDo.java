@@ -69,13 +69,13 @@ public class SwitchToDo {
 	public ArrayList<HashMap<String, String>> typeSwitch(){
 		result = new ArrayList<HashMap<String, String>>();
 		switch (_type) {
-		case "追加":
+		case "INSERT":
 			typeInsert();
 			break;
-		case "削除":
+		case "DELETE":
 			typeDelete();
 			break;
-		case "閲覧":
+		case "BROWSE":
 			typeBrowse();
 			break;
 		default:
@@ -108,9 +108,9 @@ public class SwitchToDo {
 			int errorNum = statementByKoki.update();
 			HashMap<String, String> x = new HashMap<String,String>();
 			if(errorNum == 0){
-				x.put("message", "成功しました");
+				x.put("title", "成功しました");
 			}else{
-				x.put("message", "失敗しました");
+				x.put("title", "失敗しました");
 			}
 			result.add(x);
 			
@@ -128,7 +128,7 @@ public class SwitchToDo {
 			DBManager db = new DBManager(Database.DBName);
 			PreparedStatementByKoki statementByKoki=null;
 			statementByKoki = db.getStatementByKoki(InspectionValue.readSql(_servlet,"TodoBrowse.sql"));
-			statementByKoki.setString("_ID", _userId);
+			statementByKoki.setInt("_ID", Integer.parseInt(_userId));
 			list = statementByKoki.select();
 			HashMap<String, String> browseData = new HashMap<String, String>();
 			for(ArrayList<String> row: list){
@@ -150,9 +150,9 @@ public class SwitchToDo {
 			int errorNum = statementByKoki.update();
 			HashMap<String, String> x = new HashMap<String,String>();
 			if(errorNum == 0){
-				x.put("message", "成功しました");
+				x.put("title", "成功しました");
 			}else{
-				x.put("message", "失敗しました");
+				x.put("title", "失敗しました");
 			}
 			result.add(x);
 		}catch(Exception e){
@@ -162,7 +162,7 @@ public class SwitchToDo {
 	
 	public void typeDefault(){
 		HashMap<String, String> defaultData = new HashMap<String, String>();
-		defaultData.put("message", "error: typeDefaultException");
+		defaultData.put("title", "error: typeDefaultException");
 		result.add(defaultData);
 	}
 }
