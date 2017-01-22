@@ -1,5 +1,6 @@
 package local.hal.st32.android.mykindreds;
 
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -15,9 +16,9 @@ import java.util.Map;
 public class TodoFunction {
 
     public static final String METHOD = "Todo";
-    public static final String INSERT = "追加";
-    public static final String DELETE = "削除";
-    public static final String BROWSE = "閲覧";
+    public static final String INSERT = "INSERT";
+    public static final String DELETE = "DELETE";
+    public static final String BROWSE = "BROWSE";
     public String METHOD_NAME = BROWSE;
     ListView _list;
 
@@ -60,6 +61,7 @@ public class TodoFunction {
 
     public void todoBrowse(){
         serverAccess serve = new serverAccess();
+        Log.d("ipaddress",URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+BROWSE);
         serve.execute(URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+BROWSE);
     }
 
@@ -71,7 +73,7 @@ public class TodoFunction {
      * @return
      */
     public String pullMission(String voice, String order){
-        int startNum = 4;
+        int startNum = 2;
         int endNum = voice.indexOf(order)-1;
         String mission = voice.substring(startNum,endNum);
         Log.d("mission:", mission);
@@ -82,15 +84,23 @@ public class TodoFunction {
 
         @Override
         public void onPostExecute(String result){
+            Replace re = new Replace();
+            List<Map<String, String>> list;
+            String message;
             switch(METHOD_NAME){
                 case INSERT:
+                    re.setRequestId("message");
+                    message = re.json(result,"data").get(0).get("message");
+                    outputMessage(message);
                     break;
                 case DELETE:
+                    re.setRequestId("message");
+                    message = re.json(result,"data").get(0).get("message");
+                    outputMessage(message);
                     break;
                 case BROWSE:
-                    Replace re = new Replace();
                     re.setRequestId("title");
-                    List<Map<String,String>> list = re.json(result, "data");
+                    list = re.json(result, "data");
                     outputList(list);
                     break;
             }
@@ -105,6 +115,10 @@ public class TodoFunction {
         _list.setAdapter(adapter);
     }
 
+    public void outputMessage(String message){
+        MainActivity.speakText.setText(message);
+        MainActivity.tts.speak(message, TextToSpeech.QUEUE_ADD, null, message);
+    }
 
 
 }
