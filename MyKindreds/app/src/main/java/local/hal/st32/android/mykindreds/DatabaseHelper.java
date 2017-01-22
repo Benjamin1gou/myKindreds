@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<String> content = new ArrayList<String>();
         content.add("INSERT INTO contents(name) VALUES('天気');");
         content.add("INSERT INTO contents(name) VALUES('検索');");
-        content.add("INSERT INTO contents(name) VALUES('TODO');");
+        content.add("INSERT INTO contents(name) VALUES('to do');");
         content.add("INSERT INTO contents(name) VALUES('テスト');");
         content.add("INSERT INTO contents(name) VALUES('バルス');");
         content.add("INSERT INTO contents(name) VALUES('現在地');");
