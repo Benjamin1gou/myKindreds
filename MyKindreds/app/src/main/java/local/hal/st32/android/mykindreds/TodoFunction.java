@@ -1,7 +1,11 @@
 package local.hal.st32.android.mykindreds;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -21,6 +25,7 @@ public class TodoFunction {
     public static final String BROWSE = "BROWSE";
     public String METHOD_NAME = BROWSE;
     ListView _list;
+    List<Map<String, String>> list;
 
     MainActivity main;
 
@@ -85,7 +90,6 @@ public class TodoFunction {
         @Override
         public void onPostExecute(String result){
             Replace re = new Replace();
-            List<Map<String, String>> list;
             String message;
             switch(METHOD_NAME){
                 case INSERT:
@@ -113,11 +117,22 @@ public class TodoFunction {
         int[] to = {android.R.id.text1};
         SimpleAdapter adapter = new SimpleAdapter(main, listDate, android.R.layout.simple_list_item_1, from, to);
         _list.setAdapter(adapter);
+        _list.setOnItemClickListener(new ListViewOnClickListener());
     }
 
     public void outputMessage(String message){
         MainActivity.speakText.setText(message);
         MainActivity.tts.speak(message, TextToSpeech.QUEUE_ADD, null, message);
+    }
+
+    private class ListViewOnClickListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Map<String, String> intentData = list.get(position);
+            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+            intent.putExtra(SearchManager.QUERY, intentData.get("title"));
+            main.startActivity(intent);
+        }
     }
 
 
