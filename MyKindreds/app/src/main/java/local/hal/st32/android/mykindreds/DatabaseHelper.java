@@ -42,6 +42,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(sql);
 
+        sb = new StringBuffer();
+        sb.append("CREATE TABLE searched(");
+        sb.append("_id INTEGER PRIMARY KEY AUTOINCREMENT,");
+        sb.append("word TEXT NOT NULL");
+        sb.append(");");
+        sql = sb.toString();
+        db.execSQL(sql);
+
         ArrayList<String> content = new ArrayList<String>();
         content.add("INSERT INTO contents(name) VALUES('天気');");
         content.add("INSERT INTO contents(name) VALUES('検索');");
@@ -50,6 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         content.add("INSERT INTO contents(name) VALUES('バルス');");
         content.add("INSERT INTO contents(name) VALUES('現在地');");
         content.add("INSERT INTO contents(name) VALUES('メモ');");
+        content.add("INSERT INTO contents(name) VALUES('履歴');");
 
         SQLiteStatement stmt;
         for (String date: content){
