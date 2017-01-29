@@ -52,7 +52,7 @@ public class Replace {
 
                 for (int x = 0; x < requestId.size(); x++) {
                     map.put(requestId.get(x), data.getString(requestId.get(x)));
-                    Log.e("map", requestId.get(x) + ":" + data.getString(requestId.get(x)));
+                    Log.d("map", requestId.get(x) + ":" + data.getString(requestId.get(x)));
                 }
                 list.add(map);
             }
@@ -115,5 +115,45 @@ public class Replace {
             flg = cursor.moveToNext();
         }
         return result;
+    }
+
+    /**
+     * 文字列抜き出しメソッド（両サイド）
+     * @param voice
+     * @param order
+     * @return
+     */
+    public String pullMission(String voice, String order){
+        int startNum = 2;
+        int endNum = voice.indexOf(order);
+        Log.d("", ""+startNum);
+        Log.d("", ""+endNum);
+        String mission = voice.substring(startNum,endNum);
+        Log.d("mission:", mission);
+        return mission;
+    }
+
+    /**
+     * 文字抜き出しメソッド（先頭）
+     * @param voice
+     * @param header
+     * @return
+     */
+    public String startPull(String voice, String header){
+        int startNum = header.length();
+        String mission = voice.substring(startNum);
+        return mission;
+    }
+
+    /**
+     * 文字抜き出しメソッド（末尾）
+     * @param voice
+     * @param ender
+     * @return
+     */
+    public String endPull(String voice, String ender){
+        int endNum = ender.length();
+        String mission = voice.substring(0,endNum);
+        return mission;
     }
 }
