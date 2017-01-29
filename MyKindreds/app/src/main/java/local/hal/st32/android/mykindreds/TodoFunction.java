@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +25,8 @@ public class TodoFunction {
     public static final String INSERT = "INSERT";
     public static final String DELETE = "DELETE";
     public static final String BROWSE = "BROWSE";
+    public static final String _ADD = "追加";
+    public static final String _DEL = "削除";
     public String METHOD_NAME = BROWSE;
     ListView _list;
     List<Map<String, String>> list;
@@ -40,10 +44,10 @@ public class TodoFunction {
      * @param voice
      */
     public void todoStart(String voice){
-        if(0 <= voice.lastIndexOf(INSERT)){
+        if(0 <= voice.lastIndexOf(_ADD)){
             METHOD_NAME = INSERT;
             todoInsert(voice);
-        }else if(0 <= voice.lastIndexOf(DELETE)){
+        }else if(0 <= voice.lastIndexOf(_DEL)){
             todoDelete(voice);
             METHOD_NAME = DELETE;
         }else{
@@ -52,22 +56,26 @@ public class TodoFunction {
     }
 
     public void todoInsert(String voice){
-        String mission = pullMission(voice, INSERT);
-        serverAccess serv = new serverAccess();
-        serv.execute(URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+INSERT+"&mission="+mission);
+        String mission = pullMission(voice, _ADD);
 
+        Log.e("mission", mission);
+        serverAccess serv = new serverAccess();
+        Log.e("ipaddress",URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+INSERT+"&mission="+mission);
+        serv.execute(URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+INSERT+"&mission="+mission);
     }
 
+
     public void todoDelete(String voice){
-        String mission = pullMission(voice, DELETE);
+        String mission = pullMission(voice, _DEL);
         serverAccess serve = new serverAccess();
+        Log.d("ipaddress",URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+DELETE+"&mission="+mission);
         serve.execute(URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+DELETE+"&mission="+mission);
     }
 
     public void todoBrowse(){
         serverAccess serve = new serverAccess();
-        Log.d("ipaddress",URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+BROWSE);
-        serve.execute(URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+BROWSE);
+        Log.d("ipaddress",URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+BROWSE+"&mission="+" ");
+        serve.execute(URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+BROWSE+"&mission="+" ");
     }
 
 
@@ -79,7 +87,9 @@ public class TodoFunction {
      */
     public String pullMission(String voice, String order){
         int startNum = 2;
-        int endNum = voice.indexOf(order)-1;
+        int endNum = voice.indexOf(order);
+        Log.d("", ""+startNum);
+        Log.d("", ""+endNum);
         String mission = voice.substring(startNum,endNum);
         Log.d("mission:", mission);
         return mission;
@@ -93,13 +103,13 @@ public class TodoFunction {
             String message;
             switch(METHOD_NAME){
                 case INSERT:
-                    re.setRequestId("message");
-                    message = re.json(result,"data").get(0).get("message");
+                    re.setRequestId("title");
+                    message = re.json(result,"data").get(0).get("title");
                     outputMessage(message);
                     break;
                 case DELETE:
-                    re.setRequestId("message");
-                    message = re.json(result,"data").get(0).get("message");
+                    re.setRequestId("title");
+                    message = re.json(result,"data").get(0).get("title");
                     outputMessage(message);
                     break;
                 case BROWSE:
@@ -108,6 +118,7 @@ public class TodoFunction {
                     outputList(list);
                     break;
             }
+            MainActivity.tts.speak(Voice.voiceTodo, TextToSpeech.QUEUE_ADD, null, Voice.voiceTodo);
         }
 
     }
