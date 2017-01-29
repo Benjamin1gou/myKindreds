@@ -20,8 +20,13 @@ public class WebSearchFunction {
     public void startWeb(String voice){
         Replace re = new Replace();
         String searchWord = re.startPull(voice,"検索");
+        DataAccess.historySave(main, searchWord);
         Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
         intent.putExtra(SearchManager.QUERY, searchWord);
         main.startActivity(intent);
     }
+
+
+
+
 }

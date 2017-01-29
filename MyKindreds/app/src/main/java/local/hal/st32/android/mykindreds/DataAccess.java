@@ -3,6 +3,7 @@ package local.hal.st32.android.mykindreds;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -28,11 +29,37 @@ public class DataAccess {
             result = re.analysisCursor(cursor);
 
         }catch(Exception ex){
-            Log.e("ERROR", ex.toString());
+            Log.e("contentsAll", ex.toString());
         }finally{
             db.close();
         }
         return result;
     }
+
+    /**
+     * web検索履歴保存メソッド
+     * @param context
+     * @param word
+     */
+    public static void historySave(Context context, String word){
+        DatabaseHelper helper = new DatabaseHelper(context);
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        String sql = "INSERT INTO searched(word) VALUES(?);";
+        SQLiteStatement stmt = db.compileStatement(sql);
+        stmt.bindString(1, word);
+        db.beginTransaction();
+        try{
+            stmt.executeInsert();
+            db.setTransactionSuccessful();
+        }catch (Exception ex){
+            Log.e("historySave", ex.toString());
+        }finally {
+            db.endTransaction();
+            db.close();
+        }
+    }
+
+
 
 }
