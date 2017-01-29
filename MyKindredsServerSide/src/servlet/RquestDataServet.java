@@ -55,8 +55,11 @@ public class RquestDataServet extends HttpServlet {
 		case "Todo":
 			String type = request.getParameter("type");
 			String mission = request.getParameter("mission");
+			
+			
 			System.out.println("type:"+type);
 			System.out.println("mission:"+mission);
+			
 			SwitchToDo todo = new SwitchToDo(mission, userId, type, this);
 			returnData.put("data", todo.typeSwitch());
 			break;

@@ -116,6 +116,6 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     }
 
     public void testOn(View view){
-        functions.methodSwitch("現在地");
+        functions.methodSwitch("直近");
     }
 }
