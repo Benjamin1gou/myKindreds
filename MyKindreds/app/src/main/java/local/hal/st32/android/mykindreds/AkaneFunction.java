@@ -33,9 +33,10 @@ public class AkaneFunction {
         int count = 0;
 
         for (String content: contents ){
-            if(content.indexOf(voice) >= 0){
+            if(voice.indexOf(content) >= 0){
                 break;
             }else{
+
                 count++;
             }
         }
@@ -80,8 +81,17 @@ public class AkaneFunction {
                 musuka.bals();
                 break;
 
+            /**
+             * 現在地取得
+             */
             case 5:
                 NowLocationGetFunction location = new NowLocationGetFunction(context);
+                break;
+
+            /**
+             * メモ
+             */
+            case 6:
                 break;
 
 
