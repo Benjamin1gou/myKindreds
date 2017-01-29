@@ -107,7 +107,7 @@ public class SwitchToDo {
 			statementByKoki.setString("TITLE", _misson);
 			int errorNum = statementByKoki.update();
 			HashMap<String, String> x = new HashMap<String,String>();
-			if(errorNum == 0){
+			if(errorNum == 1){
 				x.put("title", "成功しました");
 			}else{
 				x.put("title", "失敗しました");
