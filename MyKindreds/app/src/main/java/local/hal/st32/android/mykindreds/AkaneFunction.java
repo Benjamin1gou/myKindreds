@@ -55,6 +55,8 @@ public class AkaneFunction {
              * 検索
              */
             case 1:
+                WebSearchFunction search = new WebSearchFunction(context);
+                search.startWeb(voice);
                 break;
 
             /**
