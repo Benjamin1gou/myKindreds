@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">MyKindredsFroTablet</string>
+    <string name="app_name">MyKindredsForTablet</string>
+
+    <string name="todo_name">TODO</string>
+    <string name="weather_name">天気</string>
+    <string name="memo_name">メモ</string>
+    <string name="group_todo_title">グループ</string>
 </resources>
