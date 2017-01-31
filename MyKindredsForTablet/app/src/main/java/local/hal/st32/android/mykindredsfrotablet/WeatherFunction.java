@@ -9,6 +9,7 @@ import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.text.TextUtils.TruncateAt;
 
@@ -22,7 +23,14 @@ public class WeatherFunction {
 
     private ImageView weatherIcon;
 
-    public void startWeather(){
+    private String MODE;
+
+    private static final String VOICE = "VOICE";
+    private static final String START = "START";
+
+
+    public void startWeather(String mode){
+        this.MODE = mode;
         Weather weather = new Weather();
         weatherIcon = MainActivity.weatherIcon;
         //ここ修復まち　引数一つのためくっつけるように変更
@@ -53,7 +61,16 @@ public class WeatherFunction {
             }
 
             String msg = Voice.voiceWeather+"今日の天気は" + telop + "\n" + text;
-            weatherOutPut(telop,msg);
+            switch(MODE){
+                case VOICE:
+                    weatherOutPut(telop,msg);
+                    break;
+
+                case START:
+                    weatherOutPut(telop,"");
+                    break;
+            }
+
         }
 
     }
@@ -64,14 +81,14 @@ public class WeatherFunction {
      * @param msg
      */
     public void weatherOutPut(String telop, String msg){
-//        MainActivity.character.setImageResource(R.drawable.akane_speak);
+        MainActivity.character.setImageResource(R.drawable.akane_basic);
         String speak = msg;
         speak = weatherSwitch(telop, speak);
 
         MainActivity.speakText.setFocusableInTouchMode(true);
         MainActivity.speakText.setEllipsize(TruncateAt.MARQUEE);
         MainActivity.speakText.setText(speak);
-//        MainActivity.tts.speak(speak, TextToSpeech.QUEUE_ADD, null, speak);
+        MainActivity.tts.speak(speak, TextToSpeech.QUEUE_ADD, null, speak);
     }
 
     /**
