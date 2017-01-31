@@ -6,4 +6,5 @@ package local.hal.st32.android.mykindreds;
 
 public interface User {
     String userData = "99999";
+    int terminalNo = 1;
 }

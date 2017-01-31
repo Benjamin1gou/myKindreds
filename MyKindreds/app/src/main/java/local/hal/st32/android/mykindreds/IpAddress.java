@@ -7,5 +7,5 @@ package local.hal.st32.android.mykindreds;
  */
 
 public interface IpAddress {
-    public static final String ipAddress = "172.20.10.6";
+    public static final String ipAddress = "192.168.11.5";
 }
