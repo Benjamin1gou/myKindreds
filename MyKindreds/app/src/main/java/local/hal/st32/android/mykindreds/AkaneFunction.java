@@ -96,6 +96,14 @@ public class AkaneFunction {
             case 6:
                 break;
 
+            /**
+             * web履歴
+             */
+            case 7:
+                WebHistoryFunction history = new WebHistoryFunction(context);
+                history.historyStart();
+                break;
+
 
             default:
                 MainActivity.icon.setImageResource(R.drawable.question);
