@@ -37,17 +37,16 @@
             android:textSize="20sp"
             android:textColor="@color/textClear"
             android:textAlignment="center"
-            android:background="@color/titleBackground"
+            android:background="@color/titleBackground" />
 
-            />
-
-        <ListView
-            android:id="@+id/weatherList"
+        <ImageView
+            android:id="@+id/whetherIcon"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3">
+            android:layout_weight="3"
+            android:padding="70dp"/>
 
-        </ListView>
+
 
 
 
@@ -81,8 +80,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:id="@+id/textView" />
+            android:text="@string/history_name"
+            android:textSize="20sp"
+            android:textColor="@color/textClear"
+            android:background="@color/titleBackground"
+            android:textAlignment="center" />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/historyList"
+            android:layout_weight="3">
+
+        </ListView>
 
 
     </LinearLayout>
@@ -122,8 +131,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text=""
+                android:textColor="@color/textClear"
+                android:textSize="15dp"
                 android:layout_weight="6"
-                android:background="@color/textDefault"/>
+                android:background="@color/textDefault"
+                android:padding="5dp"/>
 
             <ImageView
                 android:onClick="voiceOn"
@@ -138,8 +150,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>
