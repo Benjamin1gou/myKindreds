@@ -1,24 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android ="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:app= "http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/textClear"
-    android:fitsSystemWindows = "true">
+    android:background="@color/textClear">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        android:background="@drawable/simple_border"
+        android:baselineAligned="false">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabTextColor"
-        android:onClick="voiceOn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:src="@android:drawable/ic_btn_speak_now"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        app:layout_anchor="@+id/linearLayout"
-        app:layout_anchorGravity="bottom|right" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/todo_name"
+            android:textColor="@color/textClear"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:background="@color/titleBackground" />
 
-</android.support.design.widget.CoordinatorLayout>
+        <ListView
+            android:id="@+id/todoList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+        </ListView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/weather_name"
+            android:textSize="20sp"
+            android:textColor="@color/textClear"
+            android:textAlignment="center"
+            android:background="@color/titleBackground"
+
+            />
+
+        <ListView
+            android:id="@+id/weatherList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+        </ListView>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        android:background="@drawable/simple_border">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/memo_name"
+            android:textSize="20sp"
+            android:textColor="@color/textClear"
+            android:background="@color/titleBackground"
+            android:textAlignment="center"/>
+
+        <ListView
+            android:id="@+id/memoList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+        </ListView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:id="@+id/textView" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        android:background="@drawable/simple_border">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/group_todo_title"
+            android:textSize="20sp"
+            android:textColor="@color/textClear"
+            android:background="@color/titleBackground"
+            android:textAlignment="center"/>
+
+        <ListView
+            android:id="@+id/GroupList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6">
+
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/speakText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text=""
+                android:layout_weight="6"
+                android:background="@color/textDefault"/>
+
+            <ImageView
+                android:onClick="voiceOn"
+                android:id="@+id/character"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:src="@drawable/akane_basic"
+                android:paddingTop="50dp"
+                android:layout_gravity="bottom|end"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
