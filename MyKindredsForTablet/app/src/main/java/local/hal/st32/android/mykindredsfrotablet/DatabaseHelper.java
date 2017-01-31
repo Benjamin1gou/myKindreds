@@ -23,6 +23,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     private static final int DATABASE_VERSION = 1;
 
+    static final String CONTENTS_SQL = "CREATE TABLE contents ( _id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL);";
+    static final String HISTORY_SQL = "CREATE TABLE searched(_id INTEGER PRIMARY KEY AUTOINCREMENT,word TEXT NOT NULL);)";
+
     /**
      * コンストラクタ
      */
@@ -32,23 +35,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        StringBuffer sb = new StringBuffer();
-        sb.append("CREATE TABLE contents (");
-        sb.append("_id INTEGER PRIMARY KEY AUTOINCREMENT,");
-        sb.append("name TEXT NOT NULL");
-        sb.append(");");
-
-        String sql = sb.toString();
-
-        db.execSQL(sql);
-
-        sb = new StringBuffer();
-        sb.append("CREATE TABLE searched(");
-        sb.append("_id INTEGER PRIMARY KEY AUTOINCREMENT,");
-        sb.append("word TEXT NOT NULL");
-        sb.append(");");
-        sql = sb.toString();
-        db.execSQL(sql);
+        db.execSQL(CONTENTS_SQL);
+        db.execSQL(HISTORY_SQL);
 
         ArrayList<String> content = new ArrayList<String>();
         content.add("INSERT INTO contents(name) VALUES('天気');");
