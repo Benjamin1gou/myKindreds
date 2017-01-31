@@ -6,4 +6,6 @@
 
     <color name="textDefault">#99777777</color>
     <color name="textClear">#ffffff</color>
+
+    <color name="titleBackground">#8888ff</color>
 </resources>
