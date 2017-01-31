@@ -60,6 +60,29 @@ public class DataAccess {
         }
     }
 
+    /**
+     * todo 履歴取得メソッド作成する
+     */
+    public static ArrayList<String> historyGet(Context context){
+        DatabaseHelper helper = new DatabaseHelper(context);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ArrayList<String> result = new ArrayList<String>();
+        Cursor cursor = null;
+        String sql = "SELECT word FROM searched";
+
+        try{
+            cursor = db.rawQuery(sql,null);
+            Replace re = new Replace();
+            re.setRequestId("word");
+            result = re.analysisCursor(cursor);
+
+        }catch(Exception ex){
+            Log.e("historyGet", ex.toString());
+        }finally{
+            db.close();
+        }
+        return result;
+    }
 
 
 }
