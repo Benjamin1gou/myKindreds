@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * バージョン情報の定数フィールド
      */
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     /**
      * コンストラクタ
@@ -30,25 +30,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
 
+    static final String CONTENTS_SQL = "CREATE TABLE contents ( _id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL);";
+    static final String HISTORY_SQL = "CREATE TABLE search_history (_id INTEGER PRIMARY KEY AUTOINCREMENT,word TEXT NOT NULL);";
+
     @Override
     public void onCreate(SQLiteDatabase db){
-        StringBuffer sb = new StringBuffer();
-        sb.append("CREATE TABLE contents (");
-        sb.append("_id INTEGER PRIMARY KEY AUTOINCREMENT,");
-        sb.append("name TEXT NOT NULL");
-        sb.append(");");
 
-        String sql = sb.toString();
-
-        db.execSQL(sql);
-
-        sb = new StringBuffer();
-        sb.append("CREATE TABLE searched(");
-        sb.append("_id INTEGER PRIMARY KEY AUTOINCREMENT,");
-        sb.append("word TEXT NOT NULL");
-        sb.append(");");
-        sql = sb.toString();
-        db.execSQL(sql);
+        db.execSQL(CONTENTS_SQL);
+        db.execSQL(HISTORY_SQL);
 
         ArrayList<String> content = new ArrayList<String>();
         content.add("INSERT INTO contents(name) VALUES('天気');");
