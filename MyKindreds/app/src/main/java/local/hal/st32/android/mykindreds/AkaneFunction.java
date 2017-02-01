@@ -94,6 +94,8 @@ public class AkaneFunction {
              * メモ
              */
             case 6:
+                MemoFunction memo = new MemoFunction(context);
+                memo.memoStart(voice);
                 break;
 
             /**
