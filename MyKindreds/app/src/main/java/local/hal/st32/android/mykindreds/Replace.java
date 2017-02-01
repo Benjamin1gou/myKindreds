@@ -138,7 +138,7 @@ public class Replace {
      * @param order
      * @return
      */
-    public String pullMission(String voice, String order){
+    public static String pullMission(String voice, String order){
         int startNum = 2;
         int endNum = voice.indexOf(order);
         Log.d("", ""+startNum);
