@@ -21,10 +21,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * バージョン情報の定数フィールド
      */
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     static final String CONTENTS_SQL = "CREATE TABLE contents ( _id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL);";
-    static final String HISTORY_SQL = "CREATE TABLE searched(_id INTEGER PRIMARY KEY AUTOINCREMENT,word TEXT NOT NULL);)";
+    static final String HISTORY_SQL = "CREATE TABLE search_history (_id INTEGER PRIMARY KEY AUTOINCREMENT,word TEXT NOT NULL);";
 
     /**
      * コンストラクタ
