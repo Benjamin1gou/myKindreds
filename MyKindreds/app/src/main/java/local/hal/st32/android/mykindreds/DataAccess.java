@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by Tester on 2017/01/12.
@@ -45,9 +46,8 @@ public class DataAccess {
         DatabaseHelper helper = new DatabaseHelper(context);
         SQLiteDatabase db = helper.getWritableDatabase();
 
-        String sql = "INSERT INTO searched(word) VALUES(?);";
+        String sql = "INSERT INTO search_history(word) VALUES('"+word+"');";
         SQLiteStatement stmt = db.compileStatement(sql);
-        stmt.bindString(1, word);
         db.beginTransaction();
         try{
             stmt.executeInsert();
@@ -63,18 +63,18 @@ public class DataAccess {
     /**
      * todo 履歴取得メソッド作成する
      */
-    public static ArrayList<String> historyGet(Context context){
+    public static ArrayList<Map<String,String>> historyGet(Context context){
         DatabaseHelper helper = new DatabaseHelper(context);
         SQLiteDatabase db = helper.getWritableDatabase();
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<Map<String,String>> result = new ArrayList<Map<String,String>>();
         Cursor cursor = null;
-        String sql = "SELECT word FROM searched";
+        String sql = "SELECT word FROM search_history order by _id desc";
 
         try{
             cursor = db.rawQuery(sql,null);
             Replace re = new Replace();
             re.setRequestId("word");
-            result = re.analysisCursor(cursor);
+            result = re.analysisCursorList(cursor);
 
         }catch(Exception ex){
             Log.e("historyGet", ex.toString());
