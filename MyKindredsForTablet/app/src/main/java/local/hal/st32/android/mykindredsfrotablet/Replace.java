@@ -156,4 +156,19 @@ public class Replace {
         String mission = voice.substring(0,endNum);
         return mission;
     }
+
+    public ArrayList<Map<String,String>> analysisCursorList(Cursor cursor){
+        ArrayList<Map<String,String>> result = new ArrayList<Map<String,String>>();
+        boolean flg = cursor.moveToFirst();
+        Map<String, String> map = new HashMap<String, String>();
+        while(flg) {
+            map = new HashMap<String, String>();
+            for(int x = 0 ; x<requestId.size(); x++){
+                map.put(requestId.get(x),cursor.getString(cursor.getColumnIndex(requestId.get(x))));
+            }
+            result.add(map);
+            flg = cursor.moveToNext();
+        }
+        return result;
+    }
 }
