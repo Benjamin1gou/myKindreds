@@ -57,7 +57,6 @@ public class TodoFunction {
 
     public void todoInsert(String voice){
         String mission = pullMission(voice, _ADD);
-
         Log.e("mission", mission);
         serverAccess serv = new serverAccess();
         Log.e("ipaddress",URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+INSERT+"&mission="+mission);
@@ -118,7 +117,6 @@ public class TodoFunction {
                     outputList(list);
                     break;
             }
-            MainActivity.tts.speak(Voice.voiceTodo, TextToSpeech.QUEUE_ADD, null, Voice.voiceTodo);
         }
 
     }
@@ -129,6 +127,7 @@ public class TodoFunction {
         SimpleAdapter adapter = new SimpleAdapter(main, listDate, android.R.layout.simple_list_item_1, from, to);
         _list.setAdapter(adapter);
         _list.setOnItemClickListener(new ListViewOnClickListener());
+        MainActivity.tts.speak(Voice.voiceTodo, TextToSpeech.QUEUE_ADD, null, Voice.voiceTodo);
     }
 
     public void outputMessage(String message){
