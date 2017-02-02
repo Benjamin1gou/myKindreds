@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.SwitchMemo;
 import beans.SwitchToDo;
 import net.arnx.jsonic.JSON;
 
@@ -47,23 +48,29 @@ public class RquestDataServet extends HttpServlet {
 		
 		String method = request.getParameter("method");
 		String userId = request.getParameter("userId");
+		String type = "";
+		String mission = "";
 		HashMap<String, ArrayList<HashMap<String,String>>> returnData = new HashMap<String, ArrayList<HashMap<String,String>>>();
 		System.out.println("method:"+method);
 		System.out.println("userId:"+userId);
 		JSON json = new JSON();
 		switch(method){
 		case "Todo":
-			String type = request.getParameter("type");
-			String mission = request.getParameter("mission");
-			
-			
+			type = request.getParameter("type");
+			mission = request.getParameter("mission");
 			System.out.println("type:"+type);
 			System.out.println("mission:"+mission);
 			
 			SwitchToDo todo = new SwitchToDo(mission, userId, type, this);
 			returnData.put("data", todo.typeSwitch());
 			break;
-		case "":
+		case "Memo":
+			type = request.getParameter("type");
+			mission = request.getParameter("mission");
+			System.out.println("type:"+type);
+			System.out.println("mission:"+mission);
+			SwitchMemo memo = new SwitchMemo(mission, userId, type, this);
+			returnData.put("data", memo.typeSwitch());
 		}
 		
 		out.println(json.encode(returnData));
