@@ -11,6 +11,9 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServlet;
 
+import beans.DBManager.PreparedStatementByKoki;
+import common.Database;
+
 public class SwitchMemo {
 	
 	/**
@@ -70,13 +73,72 @@ public class SwitchMemo {
 		result = new ArrayList<HashMap<String,String>>();
 		switch(_type){
 		case "INSERT":
+			typeInsert();
 			break;
 		case "BROWSE":
+			typeBrowse();
 			break;
 		default:
+			typeDefault();
 			break;
 		}
 		return result;	
+	}
+	
+	public void typeInsert(){
+		try{
+			//行番号取得部分
+			DBManager db = new DBManager(Database.DBName);
+			PreparedStatementByKoki statementByKoki=null;
+			statementByKoki = db.getStatementByKoki(InspectionValue.readSql(_servlet,"GetTodoLine.sql"));
+			statementByKoki.setString("TABLE_NAME", "memo");
+			statementByKoki.setString("USER_ID", _userId);
+			list = statementByKoki.select();
+			int maxLineNo = 0;
+			if(null != list.get(0).get(0)){
+				maxLineNo = Integer.parseInt(list.get(0).get(0));
+			}
+			
+			//データ登録部分
+			statementByKoki = db.getStatementByKoki(InspectionValue.readSql(_servlet,"MemoInsert.sql"));
+			statementByKoki.setInt("_ID", Integer.parseInt(_userId));
+			statementByKoki.setInt("LINE", maxLineNo+1);
+			statementByKoki.setString("TITLE", _misson);
+			int errorNum = statementByKoki.update();
+			HashMap<String, String> x = new HashMap<String,String>();
+			if(errorNum == 1){
+				x.put("title", "成功しました");
+			}else{
+				x.put("title", "失敗しました");
+			}
+			result.add(x);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void typeBrowse(){
+		try{
+			DBManager db = new DBManager(Database.DBName);
+			PreparedStatementByKoki statementByKoki=null;
+			statementByKoki = db.getStatementByKoki(InspectionValue.readSql(_servlet,"MemoBrowse.sql"));
+			statementByKoki.setInt("_ID", Integer.parseInt(_userId));
+			list = statementByKoki.select();
+			HashMap<String, String> browseData = new HashMap<String, String>();
+			for(ArrayList<String> row: list){
+				browseData = new HashMap<String, String>();
+				browseData.put("title", row.get(0));
+				result.add(browseData);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void typeDefault(){
+		HashMap<String, String> defaultData = new HashMap<String, String>();
+		defaultData.put("title", "error: typeDefaultException");
+		result.add(defaultData);
 	}
 	
 }
