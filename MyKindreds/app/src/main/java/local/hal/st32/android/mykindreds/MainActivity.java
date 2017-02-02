@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     public static ImageView character;
     public static TextView speakText;
     public static ImageView icon;
+    public static ListView list;
     private static final int REQUEST_CODE = 1000;
     private AkaneFunction functions = new AkaneFunction(MainActivity.this);
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         setContentView(R.layout.activity_main);
         speakText = (TextView)findViewById(R.id.textArea);
         icon = (ImageView)findViewById(R.id.imageView2);
+        list = (ListView)findViewById(R.id.todoList);
         tts = new TextToSpeech(this,this);
     }
 
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
             if(candidates.size() > 0) {
                 // 認識結果候補で一番有力なものを表示
                 String str = candidates.get(0);
+                clearView();
                 functions.methodSwitch(str);
             }
         }
@@ -117,5 +121,10 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
     public void testOn(View view){
         functions.methodSwitch("直近");
+    }
+
+    public void clearView (){
+        icon.setImageBitmap(null);
+        speakText.setText("");
     }
 }
