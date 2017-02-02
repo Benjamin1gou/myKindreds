@@ -59,7 +59,9 @@ public class MemoFunction {
      * メモを閲覧する際に動くメソッド
      */
     public void memoBrowse(){
-
+        serverAccess serve = new serverAccess();
+        Log.d("ipaddress",URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+BROWSE+"&mission="+" ");
+        serve.execute(URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+BROWSE+"&mission="+" ");
     }
 
     private class serverAccess extends Access{
@@ -80,7 +82,6 @@ public class MemoFunction {
                     outputList(list);
                     break;
             }
-            MainActivity.tts.speak(Voice.voiceTodo, TextToSpeech.QUEUE_ADD, null, Voice.voiceTodo);
         }
 
     }
