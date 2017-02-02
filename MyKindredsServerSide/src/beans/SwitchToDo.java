@@ -98,7 +98,11 @@ public class SwitchToDo {
 			statementByKoki = db.getStatementByKoki(InspectionValue.readSql(_servlet,"GetTodoLine.sql"));
 			statementByKoki.setString("USER_ID", _userId);
 			list = statementByKoki.select();
-			int maxLineNo = Integer.parseInt(list.get(0).get(0));
+			int maxLineNo =0;
+			if(null != list.get(0).get(0)){
+				maxLineNo = Integer.parseInt(list.get(0).get(0));
+			}
+			
 			
 			//データ登録部分
 			statementByKoki = db.getStatementByKoki(InspectionValue.readSql(_servlet,"TodoInsert.sql"));
