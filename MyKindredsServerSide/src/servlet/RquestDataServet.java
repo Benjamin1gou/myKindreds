@@ -71,7 +71,16 @@ public class RquestDataServet extends HttpServlet {
 			System.out.println("mission:"+mission);
 			SwitchMemo memo = new SwitchMemo(mission, userId, type, this);
 			returnData.put("data", memo.typeSwitch());
+			
+		case "Start":
+			SwitchToDo startTodo = new SwitchToDo("",userId, "BROWSE", this);
+			returnData.put("todo", startTodo.typeSwitch());
+			SwitchMemo startMemo = new SwitchMemo("", userId, "BROWSE", this);
+			returnData.put("memo", startMemo.typeSwitch());
+			break;
 		}
+		
+		
 		
 		out.println(json.encode(returnData));
 		out.flush();
