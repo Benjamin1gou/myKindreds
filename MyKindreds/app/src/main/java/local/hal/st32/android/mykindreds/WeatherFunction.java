@@ -120,6 +120,9 @@ public class WeatherFunction {
             case "曇時々雪":
                 weatherIcon.setImageResource(R.drawable.tenki_yuki);
                 break;
+            case "曇のち晴":
+                weatherIcon.setImageResource(R.drawable.tenki_sun);
+                break;
             default:
                 weatherIcon.setImageResource(R.drawable.question);
                 msg = "知らないパターンです。新しく登録お願いしますマスター\n" + telop;
