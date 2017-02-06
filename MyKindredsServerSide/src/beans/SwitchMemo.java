@@ -90,9 +90,9 @@ public class SwitchMemo {
 			//行番号取得部分
 			DBManager db = new DBManager(Database.DBName);
 			PreparedStatementByKoki statementByKoki=null;
-			statementByKoki = db.getStatementByKoki(InspectionValue.readSql(_servlet,"GetTodoLine.sql"));
-			statementByKoki.setString("TABLE_NAME", "memo");
+			statementByKoki = db.getStatementByKoki(InspectionValue.readSql(_servlet,"GetMemoLine.sql"));
 			statementByKoki.setString("USER_ID", _userId);
+			System.out.println(statementByKoki.out());
 			list = statementByKoki.select();
 			int maxLineNo = 0;
 			if(null != list.get(0).get(0)){
