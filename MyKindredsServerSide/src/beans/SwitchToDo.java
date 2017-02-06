@@ -53,6 +53,8 @@ public class SwitchToDo {
 	 */
 	private ArrayList<ArrayList<String>> list;
 	
+	 private int line = 0;
+	
 	
 	
 	public SwitchToDo(){
@@ -64,6 +66,10 @@ public class SwitchToDo {
 		this._servlet = servlet;
 		this._userId = userId;
 		this._type = type;
+	}
+	
+	public void setLine(int line){
+		this.line = line;
 	}
 
 	public ArrayList<HashMap<String, String>> typeSwitch(){
@@ -137,7 +143,8 @@ public class SwitchToDo {
 			HashMap<String, String> browseData = new HashMap<String, String>();
 			for(ArrayList<String> row: list){
 				browseData = new HashMap<String, String>();
-				browseData.put("title", row.get(0));
+				browseData.put("id", row.get(0));
+				browseData.put("title", row.get(1));
 				result.add(browseData);
 			}
 		}catch(Exception e){
@@ -149,12 +156,13 @@ public class SwitchToDo {
 		try{
 			DBManager db = new DBManager(Database.DBName);
 			PreparedStatementByKoki statementByKoki=null;
-			statementByKoki = db.getStatementByKoki(InspectionValue.readSql(_servlet,"TodoBrowse.sql"));
+			statementByKoki = db.getStatementByKoki(InspectionValue.readSql(_servlet,"TodoDelete.sql"));
 			statementByKoki.setString("_ID", _userId);
+			statementByKoki.setInt("_LINE", line);
 			int errorNum = statementByKoki.update();
 			HashMap<String, String> x = new HashMap<String,String>();
-			if(errorNum == 0){
-				x.put("title", "成功しました");
+			if(errorNum == 1){
+				x.put("title", "削除成功しました");
 			}else{
 				x.put("title", "失敗しました");
 			}
