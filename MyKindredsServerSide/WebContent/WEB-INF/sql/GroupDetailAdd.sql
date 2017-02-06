@@ -8,6 +8,6 @@ INSERT
  _LINE,
  /*if(_LINE)end*/
  /*if(_USER)start*/
- _USER,
+ _USER
  /*if(_USER)end*/
  );
