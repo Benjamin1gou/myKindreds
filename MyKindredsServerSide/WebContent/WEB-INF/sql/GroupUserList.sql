@@ -1,5 +1,4 @@
 SELECT 
- groups.id,
  groups.title
  FROM groups
  INNER JOIN
