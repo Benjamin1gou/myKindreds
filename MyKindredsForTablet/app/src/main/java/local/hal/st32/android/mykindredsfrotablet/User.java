@@ -5,6 +5,6 @@ package local.hal.st32.android.mykindredsfrotablet;
  */
 
 public interface User {
-    String userData = "99999";
+    String userData = "99998";
     int terminalNo = 1;
 }

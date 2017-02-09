@@ -3,12 +3,14 @@
 <fullyQualifiedTypeName name="net.arnx.jsonic.JSON"/>
 <fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="beans.SwitchToDo"/>
-<fullyQualifiedTypeName name="com.sun.net.httpserver.HttpServer"/>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
 <fullyQualifiedTypeName name="common.Database"/>
 <fullyQualifiedTypeName name="beans.DBManager2.PreparedStatementByKoki"/>
 <fullyQualifiedTypeName name="com.sun.xml.internal.ws.api.ha.StickyFeature"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.net.URLDecoder"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.sun.net.httpserver.HttpServer"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
+<fullyQualifiedTypeName name="beans.InspectionValue"/>
+<fullyQualifiedTypeName name="beans.SwitchGroup"/>
 </qualifiedTypeNameHistroy>
