@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.SwitchGroup;
 import beans.SwitchMemo;
 import beans.SwitchToDo;
 import net.arnx.jsonic.JSON;
@@ -58,10 +59,16 @@ public class RquestDataServet extends HttpServlet {
 		case "Todo":
 			type = request.getParameter("type");
 			mission = request.getParameter("mission");
+			int Line = 0;
+			
 			System.out.println("type:"+type);
 			System.out.println("mission:"+mission);
 			
 			SwitchToDo todo = new SwitchToDo(mission, userId, type, this);
+			if("DELETE".equals(type)){
+				Line = Integer.parseInt(request.getParameter("line"));
+				todo.setLine(Line);
+			}
 			returnData.put("data", todo.typeSwitch());
 			break;
 		case "Memo":
@@ -78,7 +85,23 @@ public class RquestDataServet extends HttpServlet {
 			SwitchMemo startMemo = new SwitchMemo("", userId, "BROWSE", this);
 			returnData.put("memo", startMemo.typeSwitch());
 			break;
+			
+		case "Group":
+			type = request.getParameter("type");
+			String groupName = request.getParameter("groupName");
+			System.out.println("type:"+type);
+			System.out.println("groupName:"+groupName);
+			SwitchGroup group = new SwitchGroup(groupName, userId, type, this);
+			returnData.put("data", group.typeSwitch());
+			break;
+			
+		case "Schedule":
+			type = request.getParameter("type");
+			String date = request.getParameter("date");
+			String schedule = request.getParameter("schedule");
+			
 		}
+		
 		
 		
 		
