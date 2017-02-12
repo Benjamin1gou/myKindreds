@@ -110,8 +110,10 @@ public class TodoFunction {
                     re.setRequestId("title");
                     message = re.json(result,"data").get(0).get("title");
                     outputMessage(message);
+
                     break;
                 case BROWSE:
+                    re.setRequestId("id");
                     re.setRequestId("title");
                     list = re.json(result, "data");
                     outputList(list);
@@ -139,9 +141,13 @@ public class TodoFunction {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Map<String, String> intentData = list.get(position);
-            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-            intent.putExtra(SearchManager.QUERY, intentData.get("title"));
-            main.startActivity(intent);
+            Log.e("map", ""+intentData);
+            int line = Integer.parseInt(intentData.get("id"));
+
+            serverAccess serve = new serverAccess();
+            Log.d("ipaddress",URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+DELETE+"&mission="+"");
+            serve.execute(URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+DELETE+"&mission="+""+"&line="+line);
+            METHOD_NAME = DELETE;
         }
     }
 
