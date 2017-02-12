@@ -33,6 +33,7 @@ public class AkaneFunction {
         int count = 0;
 
         for (String content: contents ){
+            Log.e("比較", content +"="+ voice);
             if(voice.indexOf(content) >= 0){
                 break;
             }else{
@@ -106,6 +107,21 @@ public class AkaneFunction {
                 history.historyStart();
                 break;
 
+            /**
+             * グループタスク
+             */
+            case 8:
+                GroupFunction group = new GroupFunction(context);
+                group.groupStart(voice);
+                break;
+
+            /**
+             * 予定
+             */
+            case 9:
+                ScheduleFunction schedule = new ScheduleFunction(context);
+                schedule.startSchedule(voice);
+                break;
 
             default:
                 MainActivity.icon.setImageResource(R.drawable.question);
