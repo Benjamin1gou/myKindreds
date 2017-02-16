@@ -47,7 +47,7 @@ public class AkaneFunction {
              */
             case 0:
                 WeatherFunction weather = new WeatherFunction();
-                weather.startWeather();
+                weather.startWeather("VOICE");
                 break;
 
             /**
@@ -70,8 +70,8 @@ public class AkaneFunction {
              * テスト
              */
             case 3:
-                VoiceTestFunction voiceTest = new VoiceTestFunction(context);
-                voiceTest.start();
+//                VoiceTestFunction voiceTest = new VoiceTestFunction(context);
+//                voiceTest.start();
                 break;
 
             /**
@@ -86,7 +86,7 @@ public class AkaneFunction {
              * 現在地取得
              */
             case 5:
-                NowLocationGetFunction location = new NowLocationGetFunction(context);
+//                NowLocationGetFunction location = new NowLocationGetFunction(context);
                 break;
 
             /**
@@ -99,6 +99,21 @@ public class AkaneFunction {
              * web履歴
              */
             case 7:
+                break;
+
+
+            /**
+             * グループタスク
+             */
+            case 8:
+                break;
+
+            /**
+             * 予定
+             */
+            case 9:
+                ScheduleFunction schedule = new ScheduleFunction(context);
+                schedule.startSchedule(voice);
                 break;
 
 
