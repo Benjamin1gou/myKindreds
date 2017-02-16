@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     public static TextView speakText;
     public static ImageView icon;
     public static ListView list;
-    private static final int REQUEST_CODE = 1000;
+    private static final int REQUEST_CODE = 500;
     private AkaneFunction functions = new AkaneFunction(MainActivity.this);
 
 
