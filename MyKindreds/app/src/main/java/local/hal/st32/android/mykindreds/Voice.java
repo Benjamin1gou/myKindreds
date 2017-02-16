@@ -12,5 +12,6 @@ public interface Voice {
     public static final String voiceWeather = "今日の天気をお伝えします";
     public static final String voiceBals = "うわぁ目がー目がー";
     public static final String voiceTodo = "現在残っている仕事はこれだけです";
+    public static final String voiceSchedule = "の予定をお伝えします。";
 
 }
