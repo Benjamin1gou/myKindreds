@@ -6,4 +6,5 @@
     <string name="memo_name">メモ</string>
     <string name="group_todo_title">グループ</string>
     <string name="history_name">履歴</string>
+    <string name="schedule_name">今日の予定</string>
 </resources>
