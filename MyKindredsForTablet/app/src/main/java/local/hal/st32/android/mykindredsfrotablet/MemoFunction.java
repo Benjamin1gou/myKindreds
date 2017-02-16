@@ -47,7 +47,7 @@ public class MemoFunction {
      * @param voice
      */
     public void memoInsert(String voice){
-        String mission = Replace.pullMission(voice, _ADD);
+        String mission = Replace.pullMission(voice, 2,_ADD);
         Log.e("mission", mission);
         serverAccess serv = new serverAccess();
         Log.e("ipaddress",URL.Todo_URL+"?method="+METHOD+"&userId="+User.userData+"&type="+INSERT+"&mission="+mission);

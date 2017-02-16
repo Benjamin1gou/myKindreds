@@ -123,8 +123,8 @@ public class Replace {
      * @param order
      * @return
      */
-    public static String pullMission(String voice, String order){
-        int startNum = 2;
+    public static String pullMission(String voice,int startValue, String order){
+        int startNum = startValue;
         int endNum = voice.indexOf(order);
         Log.d("", ""+startNum);
         Log.d("", ""+endNum);
