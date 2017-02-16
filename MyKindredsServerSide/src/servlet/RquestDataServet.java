@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.SwitchGroup;
 import beans.SwitchMemo;
+import beans.SwitchSchedule;
 import beans.SwitchToDo;
 import net.arnx.jsonic.JSON;
 
@@ -71,6 +72,7 @@ public class RquestDataServet extends HttpServlet {
 			}
 			returnData.put("data", todo.typeSwitch());
 			break;
+			
 		case "Memo":
 			type = request.getParameter("type");
 			mission = request.getParameter("mission");
@@ -78,12 +80,16 @@ public class RquestDataServet extends HttpServlet {
 			System.out.println("mission:"+mission);
 			SwitchMemo memo = new SwitchMemo(mission, userId, type, this);
 			returnData.put("data", memo.typeSwitch());
+			break;
 			
 		case "Start":
 			SwitchToDo startTodo = new SwitchToDo("",userId, "BROWSE", this);
 			returnData.put("todo", startTodo.typeSwitch());
 			SwitchMemo startMemo = new SwitchMemo("", userId, "BROWSE", this);
 			returnData.put("memo", startMemo.typeSwitch());
+			String startDate = request.getParameter("date");
+			SwitchSchedule startSchedule = new SwitchSchedule(userId, "BROWSE", startDate, "", this);
+			returnData.put("schedule", startSchedule.typeSwitch());
 			break;
 			
 		case "Group":
@@ -98,7 +104,10 @@ public class RquestDataServet extends HttpServlet {
 		case "Schedule":
 			type = request.getParameter("type");
 			String date = request.getParameter("date");
-			String schedule = request.getParameter("schedule");
+			String content = request.getParameter("schedule");
+			SwitchSchedule schedule = new SwitchSchedule(userId, type, date, content, this);
+			returnData.put("data", schedule.typeSwitch());
+			break;
 			
 		}
 		
