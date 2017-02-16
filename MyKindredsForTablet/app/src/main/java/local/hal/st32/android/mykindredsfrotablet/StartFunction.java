@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,7 @@ public class StartFunction {
     ListView memo;
     ListView history;
     ListView group;
+    ListView schedule;
     List<Map<String, String>> oneColumnList;
     MainActivity main;
 
@@ -54,9 +57,13 @@ public class StartFunction {
         todo = (ListView)main.findViewById(R.id.todoList);
         memo = (ListView)main.findViewById(R.id.memoList);
         group =(ListView)main.findViewById(R.id.GroupList);
+        schedule = (ListView)main.findViewById(R.id.scheduleList);
+        Calendar calendar = new GregorianCalendar();
+        String dateTime = "";
+        dateTime = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.DAY_OF_MONTH);
         ServerAccess access = new ServerAccess();
         //todo ここ引数入れる
-        access.execute(URL.Todo_URL+"?method=Start&userId="+User.userData);
+        access.execute(URL.Todo_URL+"?method=Start&userId="+User.userData+"&date="+dateTime);
 //        access.execute(URL.Todo_URL+"?method=Todo&userId="+User.userData+"&type=BROWSE&mission="+" ");
 
     }
@@ -70,7 +77,8 @@ public class StartFunction {
             outputTodoList(oneColumnList);
             oneColumnList = re.json(result, "memo");
             outputMemoList(oneColumnList);
-
+            oneColumnList = re.json(result, "schedule");
+            outputScheduleList(oneColumnList);
         }
     }
 
@@ -89,6 +97,13 @@ public class StartFunction {
         SimpleAdapter adapter = new SimpleAdapter(main, listDate, android.R.layout.simple_list_item_1, from, to);
         memo.setAdapter(adapter);
 //        todo.setOnItemClickListener(new TodoFunction.ListViewOnClickListener());
+    }
+
+    public void outputScheduleList(List<Map<String, String>> listDate){
+        String[] from = {"title"};
+        int[] to = {android.R.id.text1};
+        SimpleAdapter adapter = new SimpleAdapter(main, listDate, android.R.layout.simple_list_item_1, from, to);
+        schedule.setAdapter(adapter);
     }
 
 
