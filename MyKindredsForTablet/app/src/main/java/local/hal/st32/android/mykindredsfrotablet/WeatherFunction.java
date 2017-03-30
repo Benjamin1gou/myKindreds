@@ -34,7 +34,7 @@ public class WeatherFunction {
         Weather weather = new Weather();
         weatherIcon = MainActivity.weatherIcon;
         //ここ修復まち　引数一つのためくっつけるように変更
-        weather.execute(URL.WEATHER_URL+"?city=270000");
+        weather.execute(URL.WEATHER_URL+"?city=130010");
     }
 
 
